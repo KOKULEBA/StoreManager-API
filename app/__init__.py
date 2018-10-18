@@ -3,6 +3,7 @@ from flask import Flask
 
 from instance.config import app_config
 from app.views.authentication import authentication
+from app.views.products import product
 
 
 def create_app(config):
@@ -14,5 +15,6 @@ def create_app(config):
     app.config["TESTING"] = True
 
     app.register_blueprint(authentication)
+    app.register_blueprint(product)
 
     return app
