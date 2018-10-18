@@ -94,3 +94,69 @@ class TestRegister(BaseTestCase):
             self.assertEqual(result4.status_code, 400)
             self.assertEqual("Fields cannot be empty", my_data4["message"])
 
+    def test_user_login(self):
+        with self.client:
+            """ Test for successful Login """
+            response = self.client.post(
+                '/api/v1/auth/login',
+                data=json.dumps(dict(
+                    username='ticia',
+                    password='password'
+
+                )),
+                content_type='application/json'
+            )
+            response_data = json.loads(response.data)
+            self.assertEqual("Login successful!", response_data["message"])
+            self.assertEqual(response.status_code, 200)
+
+            """ Test for empty data """
+            response2 = self.client.post(
+                '/api/v1/auth/login',
+                data=json.dumps(dict()
+                                ),
+                content_type='application/json'
+            )
+            response_data2 = json.loads(response2.data)
+            self.assertEqual("Fields cannot be empty", response_data2["message"])
+            self.assertEqual(response2.status_code, 400)
+
+            """ Test for missing fields """
+            response3 = self.client.post(
+                '/api/v1/auth/login',
+                data=json.dumps(dict(
+                    username='',
+                    password='1234'
+
+                )),
+                content_type='application/json'
+            )
+            response_data3 = json.loads(response3.data)
+            self.assertEqual("Username or password missing", response_data3["message"])
+            self.assertEqual(response3.status_code, 206)
+
+            """ Test for invalid login """
+            response4 = self.client.post(
+                '/api/v1/auth/login',
+                data=json.dumps(dict(
+                    username='ticia',
+                    password='1234567'
+
+                )),
+                content_type='application/json'
+            )
+            response_data4 = json.loads(response4.data)
+            self.assertEqual("The password you entered is incorrect", response_data4["message"])
+
+            """ Test for incorrect username """
+            response5 = self.client.post(
+                '/api/v1/auth/login',
+                data=json.dumps(dict(
+                    username='ruth',
+                    password='1234'
+
+                )),
+                content_type='application/json'
+            )
+            response_data5 = json.loads(response5.data)
+            self.assertEqual("Username does not exist in our records", response_data5["message"])

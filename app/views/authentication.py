@@ -50,6 +50,8 @@ def login():
     if not username or not password:
         return jsonify({"message": "Username or password missing"}), 206
     authorize = user_object.verify_password(username, password)
+    if authorize == "True":
+        return jsonify(dict(message="Login successful!")), 200
     response = jsonify(authorize)
     response.status_code = 401
     return response
