@@ -37,3 +37,19 @@ def register():
     response = jsonify(user_object.put(name, username, email, password, role))
     response.status_code = 201
     return response
+
+
+@authentication.route('/login', methods=['POST'])
+def login():
+    """login user by verifying password and creating an access token"""
+    data = request.get_json()
+    if not data:
+        return jsonify({"message": "Fields cannot be empty"}), 400
+    username = data.get('username')
+    password = data.get('password')
+    if not username or not password:
+        return jsonify({"message": "Username or password missing"}), 206
+    authorize = user_object.verify_password(username, password)
+    response = jsonify(authorize)
+    response.status_code = 401
+    return response
