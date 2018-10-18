@@ -3,12 +3,12 @@ import re
 from flask import request, jsonify, Blueprint
 from ..models import authentication_models
 
-auth = Blueprint('auth', __name__, url_prefix='/api/v1/auth')
+authentication = Blueprint('auth', __name__, url_prefix='/api/v1/auth')
 
 user_object = authentication_models.Users()
 
 
-@auth.route('/register', methods=['POST'])
+@authentication.route('/register', methods=['POST'])
 def register():
     """endpoint to add  a new user"""
     data = request.get_json()
