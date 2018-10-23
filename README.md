@@ -26,3 +26,56 @@ Store Manager api is a simple flask api that powers  a web application that help
   * virtualenv
   * python 3 or python 2.7
 ```
+
+### Setting up
+
+* clone the repo
+
+``` 
+git clone https://github.com/KOKULEBA/StoreManager-API.git
+
+```
+
+* Change working directory
+```
+
+cd StoreManager-API
+
+```
+* Create a virtual environment
+
+```
+virtualenv <env_name>
+
+```
+
+* Activate the environment:
+
+```
+$source <env_name>/bin/activate
+
+```
+* Install dependencies:
+
+```
+$pip install -r requirements.txt
+
+```
+
+* Run the app:
+
+```
+python run.py
+
+```
+### Running the tests
+* From terminal run:
+
+```
+pytest --cov=app
+
+```
+### Deployment
+
+Click [here](#) to view app on heroku
+
