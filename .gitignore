@@ -2,4 +2,4 @@
 venv/
 .coverage
 .pytest_cache/
-_pytest_cache
+_pycache
