@@ -29,3 +29,14 @@ def post_sales():
     response = jsonify(sale_object.put(sale_id, date_created, created_by, item_count, total_amount))
     response.status_code = 201
     return response
+
+
+@sale.route('/sales', methods=['GET'])
+def get_all_sales():
+    """Endpoint for only admin to view all sales"""
+    admin = "admin"
+    if ["role"] != admin:
+        return jsonify({"message": "Only an admin can view all sales records"}), 401
+    response = jsonify(sale_object.get_all_sales())
+    response.status_code = 200
+    return response
