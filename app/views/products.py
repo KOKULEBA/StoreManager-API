@@ -10,14 +10,8 @@ product_object = product_model.Product()
 @product.route('/', methods=['GET'])
 def index():
     """ root """
-    if request.method == 'GET':
-        # the following is a welcoming message (at the landing page)
-        welcome_message = {"Message": [{
-            "Welcome": "Hello! Welcome to Store manager"
-        }]}
-
-        response = {"status": "success", "Message": welcome_message}
-        return response, 200
+    # the following is a welcoming message (at the landing page)
+    return jsonify("Hello! Welcome to Store manager"), 200
 
 
 @product.route('/products', methods=['POST'])
